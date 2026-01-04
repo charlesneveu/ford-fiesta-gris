@@ -15,6 +15,24 @@ const viewTable = document.getElementById('view-table');
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
+    // Gestion des erreurs de chargement vidéo
+    video.addEventListener('error', (e) => {
+        console.error('Erreur vidéo:', video.error);
+        if (video.error) {
+            const errorMsg = video.error.message || 'Erreur de chargement de la vidéo';
+            alert('Erreur de chargement de la vidéo. Vérifiez que le fichier assets/video.mp4 existe et est au bon format.');
+        }
+    });
+    
+    // Gestion du chargement
+    video.addEventListener('loadedmetadata', () => {
+        console.log('Métadonnées vidéo chargées');
+    });
+    
+    video.addEventListener('canplay', () => {
+        console.log('Vidéo prête à être lue');
+    });
+    
     // Écouter la fin de la vidéo
     video.addEventListener('ended', () => {
         showEndScreen();
@@ -66,8 +84,15 @@ function showEndScreen() {
  */
 function replayVideo() {
     video.currentTime = 0;
-    video.play();
     endScreen.classList.add('hidden');
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            console.error('Erreur lors de la lecture:', error);
+            // Sur mobile, parfois il faut un interaction utilisateur
+            alert('Cliquez sur le bouton play de la vidéo pour la relancer.');
+        });
+    }
 }
 
 /**
