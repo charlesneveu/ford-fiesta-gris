@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Découvrez comment se réconcilier avec Anyme">
     <title>Anyme - Vidéo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,27 +14,18 @@
                 id="main-video" 
                 controls 
                 playsinline 
-                webkit-playsinline
-                x-webkit-airplay="allow"
-                preload="metadata"
-                poster=""
                 class="video-player"
-                crossorigin="anonymous">
+                onended="document.getElementById('end-screen').classList.remove('hidden')">
                 <source src="assets/video.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas la lecture de vidéos.
             </video>
-            <div id="video-error" class="video-error hidden">
-                <p>La vidéo ne peut pas être chargée.</p>
-                <p>Vérifiez votre connexion internet.</p>
-            </div>
             
-            <!-- End Screen (affiché après la fin de la vidéo) -->
+            <!-- End Screen -->
             <div id="end-screen" class="end-screen hidden">
                 <div class="end-screen-content">
                     <h2>Vidéo terminée</h2>
                     <div class="button-group">
-                        <button id="btn-revoir" class="btn btn-primary">Revoir</button>
-                        <button id="btn-suivant" class="btn btn-secondary">Suivant</button>
+                        <button onclick="document.getElementById('main-video').currentTime=0; document.getElementById('main-video').play(); document.getElementById('end-screen').classList.add('hidden')" class="btn btn-primary">Revoir</button>
+                        <button onclick="document.getElementById('view-video').classList.remove('active'); document.getElementById('view-next').classList.add('active')" class="btn btn-secondary">Suivant</button>
                     </div>
                 </div>
             </div>
@@ -48,10 +38,10 @@
             <div class="next-content">
                 <h1>Merci d'avoir regardé</h1>
                 <p class="subtitle">Continuez votre découverte</p>
-                <button id="btn-discover" class="btn btn-primary btn-large">
+                <button onclick="document.getElementById('view-next').classList.remove('active'); document.getElementById('view-table').classList.add('active')" class="btn btn-primary btn-large">
                     Pour découvrir comment se réconcilier avec Anyme
                 </button>
-                <button id="btn-retour" class="btn btn-link">Retour à la vidéo</button>
+                <button onclick="document.getElementById('view-next').classList.remove('active'); document.getElementById('view-video').classList.add('active')" class="btn btn-link">Retour à la vidéo</button>
             </div>
         </div>
     </div>
@@ -61,12 +51,9 @@
         <div class="container">
             <div class="table-content">
                 <h1>Look under the table</h1>
-                <button id="btn-retour-table" class="btn btn-link">Retour</button>
+                <button onclick="document.getElementById('view-table').classList.remove('active'); document.getElementById('view-next').classList.add('active')" class="btn btn-link">Retour</button>
             </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
-

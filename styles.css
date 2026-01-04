@@ -1,4 +1,4 @@
-/* Reset et base */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -15,26 +15,18 @@
     --bg-color: #FFFFFF;
     --bg-overlay: rgba(0, 0, 0, 0.7);
     --border-radius: 12px;
-    --spacing: 20px;
-    --safe-area-top: env(safe-area-inset-top, 0);
-    --safe-area-bottom: env(safe-area-inset-bottom, 0);
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-    padding-top: var(--safe-area-top);
-    padding-bottom: var(--safe-area-bottom);
+    padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 }
 
-/* Container principal */
+/* Container */
 .container {
-    max-width: 100%;
     width: 100%;
-    margin: 0 auto;
     padding: 10px;
     min-height: 100vh;
     display: flex;
@@ -43,7 +35,7 @@ body {
     justify-content: center;
 }
 
-/* Gestion des vues */
+/* Vues */
 .view {
     display: none;
     width: 100%;
@@ -60,31 +52,8 @@ body {
     width: 100%;
     max-width: 100%;
     height: auto;
-    min-height: 200px;
     border-radius: var(--border-radius);
     background-color: #000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    display: block;
-    object-fit: contain;
-}
-
-/* Message d'erreur vidéo */
-.video-error {
-    text-align: center;
-    padding: 20px;
-    color: var(--text-light);
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: var(--border-radius);
-    margin-top: 10px;
-}
-
-.video-error.hidden {
-    display: none;
-}
-
-.video-error p {
-    margin: 5px 0;
-    font-size: 14px;
 }
 
 /* End Screen */
@@ -99,8 +68,6 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: var(--border-radius);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 }
 
 .end-screen.hidden {
@@ -109,40 +76,35 @@ body {
 
 .end-screen-content {
     background-color: var(--bg-color);
-    padding: 40px 30px;
+    padding: 30px 20px;
     border-radius: var(--border-radius);
     text-align: center;
     max-width: 90%;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .end-screen-content h2 {
-    font-size: 24px;
-    margin-bottom: 30px;
-    color: var(--text-color);
+    font-size: 20px;
+    margin-bottom: 20px;
 }
 
 .button-group {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
     width: 100%;
 }
 
 /* Boutons */
 .btn {
-    padding: 16px 32px;
+    padding: 14px 24px;
     font-size: 16px;
     font-weight: 600;
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
-    transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
     text-align: center;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
 }
 
 .btn-primary {
@@ -150,11 +112,8 @@ body {
     color: white;
 }
 
-.btn-primary:hover,
 .btn-primary:active {
     background-color: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
 }
 
 .btn-secondary {
@@ -162,16 +121,13 @@ body {
     color: white;
 }
 
-.btn-secondary:hover,
 .btn-secondary:active {
     background-color: var(--secondary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(88, 86, 214, 0.3);
 }
 
 .btn-large {
-    padding: 20px 40px;
-    font-size: 18px;
+    padding: 16px 24px;
+    font-size: 16px;
     width: 100%;
     max-width: 500px;
 }
@@ -184,10 +140,8 @@ body {
     margin-top: 20px;
 }
 
-.btn-link:hover,
 .btn-link:active {
     color: var(--text-color);
-    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Vue Next */
@@ -195,19 +149,18 @@ body {
     text-align: center;
     max-width: 600px;
     width: 100%;
-    padding: var(--spacing);
+    padding: 20px;
 }
 
 .next-content h1 {
-    font-size: 32px;
-    margin-bottom: 15px;
-    color: var(--text-color);
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
 .subtitle {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-light);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 /* Vue Table */
@@ -215,13 +168,12 @@ body {
     text-align: center;
     max-width: 600px;
     width: 100%;
-    padding: var(--spacing);
+    padding: 20px;
 }
 
 .table-content h1 {
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: var(--text-color);
+    font-size: 28px;
+    margin-bottom: 30px;
     font-weight: 700;
 }
 
@@ -229,12 +181,14 @@ body {
 #view-video .container {
     position: relative;
     width: 100%;
-    max-width: 100%;
-    padding: 10px;
 }
 
-/* Responsive */
+/* Desktop */
 @media (min-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
     .button-group {
         flex-direction: row;
         justify-content: center;
@@ -245,53 +199,10 @@ body {
     }
     
     .next-content h1 {
-        font-size: 42px;
-    }
-    
-    .table-content h1 {
-        font-size: 48px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 15px;
-    }
-    
-    .end-screen-content {
-        padding: 30px 20px;
-    }
-    
-    .end-screen-content h2 {
-        font-size: 20px;
-    }
-    
-    .next-content h1 {
-        font-size: 28px;
-    }
-    
-    .table-content h1 {
         font-size: 32px;
     }
     
-    .btn-large {
-        padding: 18px 30px;
-        font-size: 16px;
+    .table-content h1 {
+        font-size: 36px;
     }
 }
-
-/* Accessibilité */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* Focus visible pour accessibilité clavier */
-.btn:focus-visible {
-    outline: 3px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
