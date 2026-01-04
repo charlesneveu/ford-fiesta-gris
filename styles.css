@@ -14,13 +14,19 @@
     --text-light: #86868B;
     --bg-color: #FFFFFF;
     --bg-overlay: rgba(0, 0, 0, 0.85);
-    --border-radius: 16px;
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+    --border-radius: 20px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.18);
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+    --spacing-2xl: 64px;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     background-attachment: fixed;
     color: var(--text-color);
@@ -28,17 +34,20 @@ body {
     padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
 }
 
 /* Container */
 .container {
     width: 100%;
-    padding: 15px;
+    padding: var(--spacing-md);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Vues */
@@ -85,12 +94,15 @@ body {
 }
 
 .end-screen-content {
-    background-color: var(--bg-color);
-    padding: 35px 25px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    padding: var(--spacing-xl) var(--spacing-lg);
     border-radius: var(--border-radius);
     text-align: center;
     max-width: 90%;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     animation: slideUp 0.3s ease-out;
 }
 
@@ -106,23 +118,24 @@ body {
 }
 
 .end-screen-content h2 {
-    font-size: 22px;
-    margin-bottom: 25px;
+    font-size: 28px;
+    margin-bottom: var(--spacing-lg);
     color: var(--text-color);
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .button-group {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--spacing-sm);
     width: 100%;
 }
 
 /* Boutons */
 .btn {
-    padding: 16px 28px;
-    font-size: 16px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 17px;
     font-weight: 600;
     border: none;
     border-radius: var(--border-radius);
@@ -130,9 +143,11 @@ body {
     text-decoration: none;
     display: inline-block;
     text-align: center;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow);
     -webkit-tap-highlight-color: transparent;
+    letter-spacing: -0.01em;
+    min-height: 50px;
 }
 
 .btn-primary {
@@ -156,21 +171,23 @@ body {
 }
 
 .btn-large {
-    padding: 18px 32px;
+    padding: var(--spacing-md) var(--spacing-xl);
     font-size: 17px;
     width: 100%;
     max-width: 500px;
     font-weight: 600;
+    min-height: 56px;
 }
 
 .btn-link {
     background: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.9);
-    padding: 12px 24px;
-    font-size: 14px;
-    margin-top: 20px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 15px;
+    margin-top: var(--spacing-lg);
     box-shadow: none;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    min-height: 44px;
 }
 
 .btn-link:active {
@@ -183,18 +200,22 @@ body {
     text-align: center;
     max-width: 600px;
     width: 100%;
-    padding: 30px 20px;
+    padding: var(--spacing-2xl) var(--spacing-lg);
     background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .next-content h1 {
-    font-size: 28px;
-    margin-bottom: 12px;
+    font-size: 36px;
+    margin-bottom: var(--spacing-sm);
     color: var(--text-color);
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -202,10 +223,11 @@ body {
 }
 
 .subtitle {
-    font-size: 16px;
+    font-size: 17px;
     color: var(--text-light);
-    margin-bottom: 35px;
+    margin-bottom: var(--spacing-xl);
     line-height: 1.5;
+    letter-spacing: -0.01em;
 }
 
 /* Vue Table */
@@ -213,21 +235,24 @@ body {
     text-align: center;
     max-width: 600px;
     width: 100%;
-    padding: 40px 25px;
+    padding: var(--spacing-2xl) var(--spacing-lg);
     background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     z-index: 100;
 }
 
 .table-content h1 {
-    font-size: 32px;
-    margin-bottom: 35px;
-    font-weight: 700;
+    font-size: 40px;
+    margin-bottom: var(--spacing-xl);
+    font-weight: 800;
     color: var(--text-color);
-    line-height: 1.3;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 /* Animation Anniversaire */
@@ -459,48 +484,49 @@ body {
 /* Responsive Mobile First */
 @media (max-width: 480px) {
     .container {
-        padding: 10px;
+        padding: var(--spacing-md);
     }
     
     #view-video .container {
-        padding: 10px;
+        padding: var(--spacing-md);
     }
     
     .end-screen-content {
-        padding: 30px 20px;
+        padding: var(--spacing-xl) var(--spacing-md);
     }
     
     .end-screen-content h2 {
-        font-size: 20px;
-        margin-bottom: 20px;
+        font-size: 24px;
+        margin-bottom: var(--spacing-lg);
     }
     
     .next-content {
-        padding: 25px 15px;
+        padding: var(--spacing-xl) var(--spacing-md);
     }
     
     .next-content h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
+        font-size: 28px;
+        margin-bottom: var(--spacing-sm);
     }
     
     .subtitle {
-        font-size: 15px;
-        margin-bottom: 30px;
+        font-size: 16px;
+        margin-bottom: var(--spacing-xl);
     }
     
     .btn-large {
-        padding: 16px 24px;
-        font-size: 16px;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 17px;
+        min-height: 52px;
     }
     
     .table-content {
-        padding: 30px 20px;
+        padding: var(--spacing-xl) var(--spacing-md);
     }
     
     .table-content h1 {
-        font-size: 24px;
-        margin-bottom: 30px;
+        font-size: 32px;
+        margin-bottom: var(--spacing-xl);
     }
     
     .cake {
@@ -512,16 +538,17 @@ body {
     }
     
     .button-group {
-        gap: 10px;
+        gap: var(--spacing-sm);
     }
     
     .btn {
-        padding: 14px 24px;
-        font-size: 15px;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 17px;
+        min-height: 50px;
     }
     
     .video-player {
-        border-radius: 12px;
+        border-radius: var(--border-radius);
     }
 }
 
@@ -641,26 +668,30 @@ body {
     justify-content: center;
     overflow: hidden;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: var(--spacing-xl) var(--spacing-md);
 }
 
 .intro-content {
     position: relative;
     z-index: 1000;
     text-align: center;
-    padding: 40px 20px;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    max-width: 600px;
+    width: 100%;
 }
 
 .birthday-title {
-    font-size: 42px;
-    font-weight: 900;
+    font-size: 56px;
+    font-weight: 800;
     color: #FFD700;
     text-shadow: 
-        0 0 10px rgba(255, 215, 0, 0.8),
-        0 0 20px rgba(255, 215, 0, 0.6),
-        0 0 30px rgba(255, 215, 0, 0.4),
-        3px 3px 6px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
-    letter-spacing: 4px;
+        0 0 20px rgba(255, 215, 0, 0.9),
+        0 0 40px rgba(255, 215, 0, 0.7),
+        0 0 60px rgba(255, 215, 0, 0.5),
+        0 4px 12px rgba(0, 0, 0, 0.4);
+    margin-bottom: var(--spacing-xl);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     -webkit-animation: titleGlow 2s ease-in-out infinite;
     animation: titleGlow 2s ease-in-out infinite;
     -webkit-transform: translateZ(0);
@@ -706,9 +737,12 @@ body {
 }
 
 .btn-intro {
-    font-size: 18px;
-    padding: 18px 40px;
-    margin-top: 20px;
+    font-size: 17px;
+    font-weight: 600;
+    padding: var(--spacing-md) var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+    min-width: 200px;
+    letter-spacing: -0.01em;
 }
 
 /* Feux d'artifice */
@@ -1008,23 +1042,33 @@ body {
 
 /* Responsive Intro */
 @media (max-width: 480px) {
+    .intro-container {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+    
+    .intro-content {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
     .birthday-title {
-        font-size: 28px;
-        letter-spacing: 2px;
-        margin-bottom: 30px;
+        font-size: 36px;
+        letter-spacing: -0.01em;
+        margin-bottom: var(--spacing-xl);
+        line-height: 1.1;
     }
     
     .btn-intro {
-        font-size: 16px;
-        padding: 16px 32px;
+        font-size: 17px;
+        padding: var(--spacing-md) var(--spacing-lg);
+        min-width: 180px;
     }
     
     .candle {
-        font-size: 30px;
+        font-size: 32px;
     }
     
     .candles-container {
-        gap: 15px;
-        bottom: 15px;
+        gap: var(--spacing-md);
+        bottom: var(--spacing-md);
     }
 }
