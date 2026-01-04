@@ -79,7 +79,7 @@
             <!-- Texte Joyeux Anniversaire -->
             <div class="intro-content">
                 <h1 class="birthday-title">JOYEUX ANNIVERSAIRE</h1>
-                <button onclick="const bgVideo = document.getElementById('background-video'); if(bgVideo) { bgVideo.classList.add('hidden'); setTimeout(function() { bgVideo.pause(); }, 500); } document.getElementById('view-intro').classList.remove('active'); document.getElementById('view-video').classList.add('active')" class="btn btn-primary btn-intro">Commencer</button>
+                <button onclick="const bgVideo = document.getElementById('background-video'); if(bgVideo) { bgVideo.pause(); bgVideo.muted = true; bgVideo.volume = 0; bgVideo.style.display = 'none'; } document.getElementById('view-intro').classList.remove('active'); document.getElementById('view-video').classList.add('active')" class="btn btn-primary btn-intro">Commencer</button>
             </div>
         </div>
     </div>
