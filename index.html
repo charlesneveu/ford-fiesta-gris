@@ -13,13 +13,12 @@
         <video 
             id="background-video" 
             autoplay 
-            muted
             loop 
             playsinline 
             webkit-playsinline
             preload="auto"
-            class="background-video"
-            onloadeddata="this.muted=false; this.play();">
+            volume="1"
+            class="background-video">
             <source src="assets/fond.mp4" type="video/mp4">
         </video>
         
@@ -154,46 +153,80 @@
     </div>
 
     <script>
-        // Forcer la lecture de la vidéo de fond sur Chrome
-        document.addEventListener('DOMContentLoaded', function() {
+        // Forcer la lecture de la vidéo de fond avec son sur tous les navigateurs
+        (function() {
             const bgVideo = document.getElementById('background-video');
-            if (bgVideo) {
-                // Essayer de jouer la vidéo
+            if (!bgVideo) return;
+            
+            // Fonction pour forcer la lecture avec son
+            function forcePlayWithSound() {
+                // Essayer directement avec son
+                bgVideo.muted = false;
                 const playPromise = bgVideo.play();
+                
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
-                        // Vidéo jouée avec succès, activer le son
+                        // Succès, son activé
                         bgVideo.muted = false;
+                        console.log('Vidéo lancée avec son');
                     }).catch(error => {
-                        // Si autoplay échoue, essayer avec muted puis activer le son
+                        // Échec, essayer avec muted puis activer le son
+                        console.log('Tentative avec muted puis activation son');
                         bgVideo.muted = true;
                         bgVideo.play().then(() => {
+                            // Activer le son immédiatement
                             setTimeout(() => {
                                 bgVideo.muted = false;
-                            }, 100);
+                                bgVideo.volume = 1;
+                            }, 50);
+                        }).catch(() => {
+                            // Si ça échoue encore, utiliser l'interaction utilisateur
+                            document.body.addEventListener('click', function enableSound() {
+                                bgVideo.muted = false;
+                                bgVideo.volume = 1;
+                                bgVideo.play();
+                                document.body.removeEventListener('click', enableSound);
+                            }, { once: true });
                         });
                     });
                 }
-                
-                // Forcer la lecture après chargement
-                bgVideo.addEventListener('loadeddata', function() {
-                    this.muted = false;
-                    this.play().catch(() => {
-                        this.muted = true;
-                        this.play().then(() => {
-                            setTimeout(() => {
-                                this.muted = false;
-                            }, 100);
-                        });
-                    });
-                });
-                
-                // Relancer si la vidéo s'arrête
-                bgVideo.addEventListener('pause', function() {
-                    this.play();
-                });
             }
-        });
+            
+            // Essayer dès que possible
+            if (bgVideo.readyState >= 2) {
+                forcePlayWithSound();
+            } else {
+                bgVideo.addEventListener('loadeddata', forcePlayWithSound, { once: true });
+                bgVideo.addEventListener('canplay', forcePlayWithSound, { once: true });
+            }
+            
+            // Forcer le volume
+            bgVideo.volume = 1;
+            
+            // Relancer si la vidéo s'arrête
+            bgVideo.addEventListener('pause', function() {
+                this.play();
+            });
+            
+            // S'assurer que le son reste activé
+            bgVideo.addEventListener('play', function() {
+                this.muted = false;
+                this.volume = 1;
+            });
+            
+            // Utiliser l'interaction utilisateur si disponible
+            ['click', 'touchstart', 'keydown'].forEach(event => {
+                document.addEventListener(event, function enableVideo() {
+                    bgVideo.muted = false;
+                    bgVideo.volume = 1;
+                    bgVideo.play();
+                    document.removeEventListener(event, enableVideo);
+                }, { once: true });
+            });
+            
+            // Forcer au chargement de la page
+            window.addEventListener('load', forcePlayWithSound);
+        })();
     </script>
 </body>
 </html>
