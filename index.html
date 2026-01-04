@@ -14,9 +14,13 @@
                 id="main-video" 
                 controls 
                 playsinline 
+                webkit-playsinline
+                preload="metadata"
                 class="video-player"
-                onended="document.getElementById('end-screen').classList.remove('hidden')">
+                onended="document.getElementById('end-screen').classList.remove('hidden')"
+                onerror="alert('Erreur de chargement de la vidéo. Vérifiez votre connexion.')">
                 <source src="assets/video.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture de vidéos.
             </video>
             
             <!-- End Screen -->
